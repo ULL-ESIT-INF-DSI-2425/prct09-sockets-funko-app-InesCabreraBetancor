@@ -7,7 +7,7 @@
   "scripts": {
     "doc": "typedoc",
     "test": "vitest run",
-    "coverage": "vitest run --coverage --coverage.include=src/**/*.ts",
+    "coverage": "vitest run --coverage --coverage.exclude=src/{cli}.ts --coverage.include=src{funko, funkoService}.ts",
     "build": "tsc",
     "start": "npm run build && node dist/ejercicio-1.js",
     "ej1": "node dist/modificacion/ejercicio-1.js",
@@ -26,6 +26,7 @@
   "homepage": "https://github.com/ULL-ESIT-INF-DSI-2425/prct09-sockets-funko-app-InesCabreraBetancor#readme",
   "devDependencies": {
     "@eslint/js": "^9.23.0",
+    "@types/node": "^22.13.14",
     "@types/yargs": "^17.0.33",
     "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.1",
