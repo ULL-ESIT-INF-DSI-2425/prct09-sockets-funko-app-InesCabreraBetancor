@@ -1,7 +1,7 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { Funko, TipoFunko, GeneroFunko } from './funko.js';
-import { addFunko, updateFunko, deleteFunko, listFunkos, showFunko } from './ServiceFunko.js';
+import { addFunko, updateFunko, deleteFunko, listFunkos, showFunko } from './toolsFunko.js';
 
 yargs(hideBin(process.argv))
     .command('add', 'Añadir un Funko', {
