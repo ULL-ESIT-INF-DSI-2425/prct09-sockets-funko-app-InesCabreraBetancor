@@ -7,7 +7,7 @@
   "scripts": {
     "doc": "typedoc",
     "test": "vitest run",
-    "coverage": "vitest run --coverage.include=tests/funko.spec.ts --coverage.exclude=tests/ServiceFunko.spec.ts",
+    "coverage": "vitest run --coverage.include=src/*.ts",
     "build": "tsc",
     "start": "npm run build && node dist/ejercicio-1.js",
     "ej1": "node dist/modificacion/ejercicio-1.js",
