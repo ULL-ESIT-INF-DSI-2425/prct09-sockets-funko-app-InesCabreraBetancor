@@ -39,7 +39,6 @@ class MessageEventEmitter extends EventEmitter {
   }
 }
 
-
 const server = net.createServer((socket) => {
 const emitter = new MessageEventEmitter(socket);
 emitter.on('message', (request: RequestType) => {
