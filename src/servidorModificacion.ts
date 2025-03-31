@@ -1,23 +1,34 @@
 import * as net from 'net';
-import * as fs from 'fs';
 
 const clientes : [net.Socket, number][] = [];
 let mensajes_enviados : [string][] = [];
 let ids_sockets = 0;
 
+let wholeData = '';
+
 const server = net.createServer((servidor) => {
   const clientId = ++ids_sockets;
   console.log(`Nuevo cliente conectado con ID ${clientId}`);
   clientes.push([servidor, clientId]);
-  servidor.on('data', (data) => {
+  /**
+   * Funcion para poder enviarle datos al resto de clientes conectados
+   * buscamos el index para idetificar en los chats quien habla.
+   */
+  servidor.on('data', (dataChunk) => {
+    wholeData += dataChunk;
+    let mensaje = JSON.parse(wholeData);
     const clientIndex = clientes.findIndex(([s]) => s === servidor);
     if (clientIndex !== -1) {
-      const [client, id] = clientes[clientIndex];
-      const msg = data.toString().trim();
+      const [_, id] = clientes[clientIndex];
+      const msg = mensaje;
       console.log(`Cliente ${id}: ${msg}`);
       enviarOtrosClientes(`Cliente ${id}: ${msg}\n`, servidor);
+      wholeData = '';
     }
   });
+  /**
+   * Funcion para manejar errores de conexion
+   */
   servidor.on('error', (err) => {
     console.error('Error en la conexión:', err.message);
   });
